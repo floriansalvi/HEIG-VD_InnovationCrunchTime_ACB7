@@ -21,15 +21,8 @@
     background="color: #fafafa"
     fog="type: linear; color: #fafafa; near: 15; far: 55"
     shadow="type: pcfsoft"
-    
-    :webxr="`
-      requiredFeatures: local-floor;
-      referenceSpaceType: local-floor;
-      optionalFeatures: dom-overlay;
-      overlayElement: ${overlaySelector};
-    `"
-    vr-mode-ui="enabled: true"
-    xr-mode-ui="XRMode: xr"
+
+    vr-mode-ui="enabled: false"
 
     outline
     simple-grab
@@ -40,8 +33,13 @@
       <a-asset-item id="info-sign" src="assets/info-sign.glb"></a-asset-item>
       <a-asset-item id="plant" src="assets/plant.glb"></a-asset-item>
       <a-asset-item id="computer" src="assets/computer.glb"></a-asset-item>
+      <a-asset-item id="phone" src="assets/phone.glb"></a-asset-item>
+      <a-asset-item id="printer" src="assets/printer.glb"></a-asset-item>
+      <a-asset-item id="justice" src="assets/justice.glb"></a-asset-item>
 
       <img id="texture-floor" :src="`assets/texture-floor.jpg`">
+
+      <img id="bob" :src="`assets/bob.png`">
     </a-assets>
 
     <!-- Lights -->
@@ -57,3 +55,9 @@
     <TheCameraRig :allAssetsLoaded="allAssetsLoaded"/>
   </a-scene>
 </template>
+
+<style scoped>
+:deep(.a-enter-vr-button) {
+  display: none !important;
+}
+</style>

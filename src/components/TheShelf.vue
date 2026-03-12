@@ -26,7 +26,7 @@ const shelfWidth = ref(availableSpaceForBinders + 2*plankThickness.value)
 <template>
     <a-entity>
         <a-entity
-            id="desk"
+            id="shelf"
         >
             <a-box
                 :width="shelfWidth"
@@ -35,7 +35,7 @@ const shelfWidth = ref(availableSpaceForBinders + 2*plankThickness.value)
                 :position="`0 ${bezelThickness/2} 0`"
                 :color="shelfColor"
                 shadow="cast: true; receive: true"
-                material="roughness: 0.3; metalness: 0.1"
+                material="roughness: 0.5; metalness: 0.1"
             ></a-box>
             <a-box
                 :width="shelfWidth"
@@ -44,7 +44,7 @@ const shelfWidth = ref(availableSpaceForBinders + 2*plankThickness.value)
                 :position="`0 ${shelfHeight -bezelThickness/2} 0`"
                 :color="shelfColor"
                 shadow="cast: true; receive: true"
-                material="roughness: 0.3; metalness: 0.1"
+                material="roughness: 0.5; metalness: 0.1"
             ></a-box>
 
             <a-box
@@ -54,7 +54,7 @@ const shelfWidth = ref(availableSpaceForBinders + 2*plankThickness.value)
                 :position="`${(shelfWidth - plankThickness)/2} ${shelfHeight/2} 0`"
                 :color="shelfColor"
                 shadow="cast: true; receive: true"
-                material="roughness: 0.3; metalness: 0.1"
+                material="roughness: 0.5; metalness: 0.1"
             ></a-box>
             <a-box
                 :width="plankThickness"
@@ -63,7 +63,7 @@ const shelfWidth = ref(availableSpaceForBinders + 2*plankThickness.value)
                 :position="`${-(shelfWidth - plankThickness)/2} ${shelfHeight/2} 0`"
                 :color="shelfColor"
                 shadow="cast: true; receive: true"
-                material="roughness: 0.3; metalness: 0.1"
+                material="roughness: 0.5; metalness: 0.1"
             ></a-box>
             <a-box
                 v-for="i in Math.floor(shelfsAmount + 1)"
@@ -73,7 +73,7 @@ const shelfWidth = ref(availableSpaceForBinders + 2*plankThickness.value)
                 :position="`0 ${bezelThickness + ((shelfHeight - 2*bezelThickness)/(shelfsAmount + 1) * (i-1)) } 0`"
                 :color="shelfColor"
                 shadow="cast: true; receive: true"
-                material="roughness: 0.3; metalness: 0.1"
+                material="roughness: 0.5; metalness: 0.1"
             >
                 <a-entity>
                     <a-entity

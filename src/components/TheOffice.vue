@@ -3,6 +3,8 @@ import { ref, onMounted } from 'vue';
 
 import TheDesk from './TheDesk.vue';
 import TheShelf from './TheShelf.vue';
+import TheTable from './TheTable.vue'
+import ThePrinter from './ThePrinter.vue';
 
 const officeSize = ref(6)
 const wallColor = ref('#fafafa')
@@ -66,7 +68,7 @@ const ceilingColor = ref('#ffffff')
         </a-entity>
         <a-entity
             light="type: point;
-                    color: #fdfad3;
+                    color: #fcfae7;
                     castShadow: true;
                     intensity: 2;
                     distance: 10;
@@ -80,8 +82,13 @@ const ceilingColor = ref('#ffffff')
             :position="`${-officeSize/2 + .225} 0 0`"
             rotation="0 90 0"
         />
+        <ThePrinter 
+            :position="`0 0 ${officeSize/2 - .3}`"
+            rotation="0 180 0"
+        />
+        <TheTable 
+            :position="`${officeSize/2 - .3} 0 0`"
+            rotation="0 -90 0"
+        />
     </a-entity>
 </template>
-
-<!-- material="src: #texture-floor-wood; repeat: 4 4" -->
-<!-- shadow="cast: true; receive: true" -->

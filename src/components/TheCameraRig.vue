@@ -1,4 +1,5 @@
 <script setup>
+  import { ref, watch } from 'vue';
   import '../aframe/disable-in-vr.js';
   import '../aframe/hide-in-vr.js';
   import '../aframe/simple-navmesh-constraint.js';
@@ -8,75 +9,84 @@
   defineProps({
     allAssetsLoaded: Boolean,
   });
+
+  const rotationY = ref(0);
+  const rotationTarget = ref(0);
+  const rotationAngle = ref(90);
+
+  function turnLeft() {
+    rotationTarget.value += rotationAngle.value;
+  };
+
+  function turnRight() {
+    rotationTarget.value -= rotationAngle.value
+  };
+
+  watch(rotationTarget, (newVal) => {
+  const rig = document.getElementById('camera-rig');
+  if (rig) {
+    rig.setAttribute('animation', `property: rotation; to: 0 ${newVal} 0; dur: 500; easing: easeInOutQuad`);
+  }
+});
+
 </script>
 
 <template>
   <a-entity
     id="camera-rig"
-    movement-controls="camera: #head;"
+    :rotation="`0 ${rotationY} 0`"
+    movement-controls="enabled: true"
     disable-in-vr="component: movement-controls;"
+    :animation="{
+      property: 'rotation',
+      to: `0 ${rotationTarget} 0`,
+      dur: 500,
+      easing: 'easeInOutQuad'
+    }"
+    @animationcomplete="rotationY = rotationTarget"
   >
-
-      <a-entity
-        id="head"
-        look-controls="pointerLockEnabled: true"
-        simple-navmesh-constraint="navmesh: [data-role='nav-mesh']; height: 1.65;"
-        disable-in-vr="component: simple-navmesh-constraint;"
-        camera
-        position="0 1.65 0"
-      >
-        <a-entity
-          geometry="primitive: circle; radius: 0.0003;"
-          material="shader: flat; color: white;"
-          cursor
-          raycaster="far: 4; objects: [clickable]; showLine: false;"
-          position="0 0 -0.1"
-          disable-in-vr="component: raycaster; disableInAR: false;"
-          hide-in-vr="hideInAR: false"
-        ></a-entity>
-        <a-box
-          id="dummy-hand-right"
-          position="0.3 -0.4 -0.5"
-        ></a-box>
-        <a-entity
-          id="dummy-hand-left"
-          position="-0.3 -0.4 -0.5"
-        ></a-entity>
-      </a-entity>
-
-      <a-entity
-        id="hand-left"
-        hand-controls="hand: left"
-        blink-controls="
-          cameraRig: #camera-rig;
-          teleportOrigin: #head;
-          collisionEntities: [data-role='nav-mesh'];
-          snapTurn: false;
-        "
-        position="-0.5 1.5 0"
-        physx-grab
-      >
-        <a-sphere id="hand-left-collider"
-          radius="0.02"
-          visible="false"
-          physx-body="type: kinematic; emitCollisionEvents: true">
-        </a-sphere>
-      </a-entity>
-
-      <a-entity
-        id="hand-right"
-        hand-controls="hand: right"
-        laser-controls="hand: right"
-        raycaster="far: 4; objects: [clickable]; showLine: true;"
-        position="0.5 1.5 0"
-        physx-grab
-      >
-        <a-sphere id="hand-right-collider"
-          radius="0.02"
-          visible="false"
-          physx-body="type: kinematic; emitCollisionEvents: true">
-        </a-sphere>
-      </a-entity>
-
+    <a-entity
+      id="head"
+      camera
+      position="0 1.65 0"
+      cursor="rayOrigin: mouse; objects: .clickable"
+    ></a-entity>
   </a-entity>
+
+  <div>
+    <button class="turn-btn-left" @click="turnLeft">←</button>
+    <button class="turn-btn-right" @click="turnRight">→</button>
+  </div>
 </template>
+
+
+<style scoped>
+.turn-btn-left,
+.turn-btn-right {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 64px;
+  height: 64px;
+  font-size: 32px;
+  border: none;
+  border-radius: 9999px;
+  color: #fafafa;
+  cursor: pointer;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.turn-btn-left {
+  left: 5vw;
+}
+
+.turn-btn-right {
+  right: 5vw;
+}
+
+.turn-btn-left:hover,
+.turn-btn-right:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+</style>
