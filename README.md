@@ -13,7 +13,7 @@ Best Office Buddy est un environnement 3D développé en Vue.js et A-Frame. Il s
 
 En production, cette interface sera(it) allimentée par l'utilisation d'un LLM ou de Machine Learning. Cela offrirait à BOB un accès à l'ensemble du contexte de l'entreprise.
 
-![Aperçu de la Proof of Concept](/assets/readme.jpeg)
+![Aperçu de la Proof of Concept](docs/readme.jpeg)
 
 ## Fonctionnalités générales 🏢
 
