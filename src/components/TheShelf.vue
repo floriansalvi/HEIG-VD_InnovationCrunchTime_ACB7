@@ -1,6 +1,8 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 
+import '../aframe/clickable.js'
+
 import BaseBinder from './BaseBinder.vue';
 
 const shelfColor = ref('#8e8e8e')
@@ -20,6 +22,17 @@ const shelfsAmount = ref(4)
 
 const shelfWidth = ref(availableSpaceForBinders + 2*plankThickness.value)
 
+const isSortVisible = ref(false)
+
+function showSort() {
+    isSortVisible.value = true;
+}
+
+function hideSort() {
+    isSortVisible.value = false;
+}
+
+
 
 </script>
 
@@ -27,6 +40,9 @@ const shelfWidth = ref(availableSpaceForBinders + 2*plankThickness.value)
     <a-entity>
         <a-entity
             id="shelf"
+            class="clickable"
+            clickable
+            @click="showSort"
         >
             <a-box
                 :width="shelfWidth"
@@ -88,6 +104,20 @@ const shelfWidth = ref(availableSpaceForBinders + 2*plankThickness.value)
                     </a-entity>    
                 </a-entity>
             </a-box>
+            <a-entity
+            v-if="isSortVisible"
+            position="0 1.65 1.575">
+
+            <a-image
+                width="1.6"
+                height="0.576"
+                src="#sort"
+                look-at
+                class="clickable"
+                clickable
+                @click.stop="hideSort"
+            ></a-image>
+        </a-entity>
         </a-entity>
     </a-entity>
 </template>

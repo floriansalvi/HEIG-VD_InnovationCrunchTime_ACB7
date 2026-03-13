@@ -67,7 +67,7 @@ const tableColor = ref('#1e1e1e')
                 gltf-model="#printer"
                 scale=".25 .25 .25"
                 position="-.5 1.01 0"
-                rotation="0 90 0"
+                rotation="0 0 0"
                 shadow="cast: true; receive: true">
             ></a-entity>
             <a-entity

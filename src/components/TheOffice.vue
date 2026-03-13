@@ -75,6 +75,13 @@ const ceilingColor = ref('#ffffff')
                     decay: 1"
             position="0 2.2 0">
         </a-entity>
+        <a-image
+            src="#logo-rp"
+            :position="` ${officeSize/3} 1.75 ${-officeSize/2 + 0.001}`"
+            width="1.72"
+            height="1"
+            material="transparent: true; alphaTest: 0.5"
+        ></a-image>
         <TheDesk 
             :position="`0 0 ${-officeSize/2 + .6 + .4}`"
         />

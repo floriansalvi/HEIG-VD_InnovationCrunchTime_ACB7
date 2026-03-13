@@ -6,7 +6,12 @@ import '../aframe/clickable.js'
 const deskColor = ref('#8e8e8e')
 const infoColor = ref('#3a5bd5')
 
+const isNewsVisible = ref(true)
 const isOverlayVisible = ref(false)
+
+function hideNews() {
+    isNewsVisible.value = false
+}
 
 function showOverlay() {
   isOverlayVisible.value = true;
@@ -91,36 +96,32 @@ function hideOverlay() {
             ></a-image>
         </a-entity>
         <a-entity
+            v-if="isNewsVisible"
+            position="0 1.65 .7">
+
+            <a-image
+                width="1.6"
+                height="0.867"
+                src="#new"
+                look-at
+                class="clickable"
+                clickable
+                @click="hideNews"
+            ></a-image>
+        </a-entity>
+        <a-entity
             v-if="isOverlayVisible"
             position="0 1.65 .7">
 
-            <a-text
-                value="Bonjour, voici les dernières informations !"
-                color="#000"
-                width="2"
-                position="0 0.4 0.01"
-                align="center"
-                baseline="center"
-            ></a-text>
-
-            <a-plane
-                color="#ffffff"
-                width="2"
-                height="1"
-                position="0 0 0"
-                rotation="0 0 0"
+            <a-image
+                width="1.6"
+                height="0.448"
+                src="#help"
+                look-at
                 class="clickable"
-                shadow="cast: true; receive: true"
+                clickable
                 @click="hideOverlay"
-            >
-                <a-text
-                    value="✖"
-                    color="#fff"
-                    align="center"
-                    position="0 0 0.01"
-                    width="0.1"
-                ></a-text>
-            </a-plane>
+            ></a-image>
         </a-entity>
     </a-entity>
 </template>

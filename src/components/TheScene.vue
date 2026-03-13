@@ -40,6 +40,12 @@
       <img id="texture-floor" :src="`assets/texture-floor.jpg`">
 
       <img id="bob" :src="`assets/bob.png`">
+      <img id="logo-rp" :src="`assets/logo-rp.png`">
+      <img id="help" :src="`assets/help.png`">
+      <img id="new" :src="`assets/new.png`">
+      <img id="sort" :src="`assets/sort.png`">
+
+
     </a-assets>
 
     <!-- Lights -->
