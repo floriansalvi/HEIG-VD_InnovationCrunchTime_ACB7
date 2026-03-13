@@ -35,7 +35,7 @@
   <a-entity
     id="camera-rig"
     :rotation="`0 ${rotationY} 0`"
-    movement-controls="enabled: true"
+    movement-controls="enabled: false"
     disable-in-vr="component: movement-controls;"
     :animation="{
       property: 'rotation',

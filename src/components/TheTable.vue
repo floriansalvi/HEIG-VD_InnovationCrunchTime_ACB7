@@ -5,6 +5,28 @@ import '../aframe/clickable.js'
 
 const tableColor = ref('#1e1e1e')
 
+const phone = ref(null);
+
+onMounted(() => {
+  const phoneEl = phone.value;
+  
+  if (!phoneEl) return;
+
+  phoneEl.addEventListener('model-loaded', () => {
+    console.log('Phone model loaded');
+  });
+  phoneEl.addEventListener('sound-loaded', () => {
+    console.log('Sound ready');
+  });
+});
+
+function handlePhoneClick() {
+  if (phone.value?.components?.sound) {
+    phone.value.components.sound.playSound();
+  } else {
+    console.warn('Le composant sound n’est pas encore prêt');
+  }
+}
 </script>
 
 <template>
@@ -63,11 +85,25 @@ const tableColor = ref('#1e1e1e')
                 material="roughness: 0.7; metalness: 0.1"
             ></a-box>
             <a-entity
+                ref="phone"
                 id="phone"
                 gltf-model="#phone"
                 position="0 .75 0"
                 rotation="0 0 0"
-                shadow="cast: true; receive: true">
+                shadow="cast: true; receive: true"
+                clickable
+                class="clickable"
+                @click="handlePhoneClick()"
+                sound="
+                    src: #phone-ring;
+                    autoplay: false;
+                    loop: true;
+                    positional: true;
+                    volume: 2;
+                    maxDistance: 3;
+                    refDistance: 0.5;
+                    poolSize: 5;
+                ">
             ></a-entity>
         </a-entity>
     </a-entity>

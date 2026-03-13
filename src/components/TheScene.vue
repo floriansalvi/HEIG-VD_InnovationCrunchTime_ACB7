@@ -45,6 +45,7 @@
       <img id="new" :src="`assets/new.png`">
       <img id="sort" :src="`assets/sort.png`">
 
+      <audio id="phone-ring" src="assets/phone-ring.wav" preload="auto"></audio>
 
     </a-assets>
 
